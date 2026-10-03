@@ -1,0 +1,63 @@
+export const GALLERY_ITEMS = [
+  {
+    id: 1,
+    title: "Villa Monolith | Lake Como",
+    model: "Aurelia Air™ Series II",
+    category: "Villa",
+    location: "Como, Italy",
+    desc: "Integrated inside a triple-height spiral marble staircase, preserving 180° panoramic views of Lake Como.",
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 2,
+    title: "The Bel Air Observatory",
+    model: "Aurelia Strata™ Rectangular",
+    category: "Modern Penthouse",
+    location: "Los Angeles, CA",
+    desc: "Ultra-clear Low-Iron Starphire™ glass lift shaft rising through an open-air indoor skylight courtyard.",
+    img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 3,
+    title: "Kensington Heritage Mews",
+    model: "Aurelia Air™ Compact",
+    category: "Heritage Retrofit",
+    location: "London, UK",
+    desc: "Installed in just 48 hours without foundational digging inside an 18th-century Grade II listed residence.",
+    img: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 4,
+    title: "Palm Jumeirah Water Residence",
+    model: "Aurelia Grandeur™ Titanium",
+    category: "Luxury Estate",
+    location: "Dubai, UAE",
+    desc: "Custom Champagne Titanium PVD shaft with backlit onyx ceiling panel and voice-activated destination dispatch.",
+    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 5,
+    title: "Kyoto Minimalist Pavilion",
+    model: "Aurelia Strata™ Minimal",
+    category: "Minimalist",
+    location: "Kyoto, Japan",
+    desc: "Frameless Japanese cedar trims with acoustic dampened traction drive for zero vibration resonance.",
+    img: "https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    id: 6,
+    title: "Geneva Lakeside Penthouse",
+    model: "Aurelia Air™ Dual Entrance",
+    category: "Modern Penthouse",
+    location: "Geneva, Switzerland",
+    desc: "Double-sided pass-through doors linking the private subterranean wine vault directly to the master aerie.",
+    img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+export const GALLERY_FILTERS = [
+  { id: "all", label: "All Works" },
+  { id: "villa", label: "Private Villas" },
+  { id: "penthouse", label: "Penthouses" },
+  { id: "heritage", label: "Heritage Retrofits" },
+];
