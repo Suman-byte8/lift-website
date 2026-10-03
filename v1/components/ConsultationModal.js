@@ -19,6 +19,8 @@ const labelCls = "text-[11px] uppercase tracking-wider text-stone-600 font-mediu
 export default function ConsultationModal({ isOpen, onClose }) {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState(initialForm);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -37,7 +39,32 @@ export default function ConsultationModal({ isOpen, onClose }) {
 
   const close = () => {
     setSubmitted(false);
+    setError("");
     onClose();
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/consultation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      // The Netlify function doesn't exist under plain `next dev`; don't block local testing.
+      const devWithoutFunction = res.status === 404 && process.env.NODE_ENV !== "production";
+      if (!res.ok && !devWithoutFunction) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.message || "Something went wrong. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -87,13 +114,9 @@ export default function ConsultationModal({ isOpen, onClose }) {
               Complimentary on-site or digital BIM study for architects, interior designers, and estate homeowners.
             </p>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
-              className="space-y-4 text-left"
-            >
+            <form onSubmit={submit} className="space-y-4 text-left">
+              {/* honeypot */}
+              <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" onChange={set("company")} />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelCls}>Your Full Name</label>
@@ -148,11 +171,14 @@ export default function ConsultationModal({ isOpen, onClose }) {
                 />
               </div>
 
+              {error && <p role="alert" className="text-sm text-red-700">{error}</p>}
+
               <button
                 type="submit"
-                className="w-full bg-mineral hover:bg-black text-alabaster py-3.5 rounded-full text-xs uppercase tracking-[0.2em] font-medium transition shadow-lg mt-2"
+                disabled={sending}
+                className="w-full bg-mineral hover:bg-black disabled:opacity-60 text-alabaster py-3.5 rounded-full text-xs uppercase tracking-[0.2em] font-medium transition shadow-lg mt-2"
               >
-                Submit Advisory Request
+                {sending ? "Sending..." : "Submit Advisory Request"}
               </button>
             </form>
           </div>

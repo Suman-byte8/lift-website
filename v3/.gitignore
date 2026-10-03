@@ -7,5 +7,6 @@ coverage/
 .npm/
 .config/
 .env*
+!.env.example
 .DS_Store
 *.log
