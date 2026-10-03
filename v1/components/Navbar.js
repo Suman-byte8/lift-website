@@ -21,6 +21,18 @@ export default function Navbar() {
 
   useEffect(() => setMenuOpen(false), [pathname]);
 
+  // Lock page scroll and allow Escape to close while the mobile menu is open.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const isActive = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
@@ -77,6 +89,7 @@ export default function Navbar() {
             className="p-2 text-mineral hover:text-champagne-700 transition"
             aria-label="Toggle Navigation"
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -84,12 +97,13 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="xl:hidden fixed inset-x-0 top-[65px] bg-alabaster/98 backdrop-blur-xl border-b border-champagne-200 px-6 py-6 shadow-2xl max-h-[calc(100vh-65px)] overflow-y-auto">
+        <div id="mobile-menu" className="xl:hidden absolute inset-x-0 top-full bg-alabaster border-b border-champagne-200 px-6 py-6 shadow-2xl max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain">
           <div className="flex flex-col space-y-4">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={() => setMenuOpen(false)}
                 className={`text-left text-sm uppercase tracking-widest py-2 border-b border-stone-200/50 ${
                   isActive(link.href) ? "text-champagne-700 font-semibold" : "text-stone-600"
                 }`}
@@ -109,6 +123,7 @@ export default function Navbar() {
               </button>
               <Link
                 href="/estimator"
+                onClick={() => setMenuOpen(false)}
                 className="w-full border border-champagne-500 text-champagne-800 py-3 rounded-full text-xs uppercase tracking-widest text-center font-medium"
               >
                 Launch Cost Calculator
