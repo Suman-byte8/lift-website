@@ -2,15 +2,16 @@
 
 import { images } from '@/data/images';
 import Image from 'next/image';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import ButtonLink from '@/components/ButtonLink';
 import Link from 'next/link';
 import { ArrowDown, MoveUpRight } from 'lucide-react';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function HomeHero() {
   const sectionRef = useRef(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 70]);
   return (

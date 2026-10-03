@@ -1,16 +1,17 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
 import SmartImage from "@/components/ui/SmartImage";
 import Eyebrow from "@/components/ui/Eyebrow";
 import { ease } from "@/lib/motion";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 export default function TestimonialCarousel({ items = testimonials }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const go = useCallback((d) => setI((v) => (v + d + items.length) % items.length), [items.length]);
 
   useEffect(() => {

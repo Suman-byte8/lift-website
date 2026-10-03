@@ -1,10 +1,11 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Icon from '@/components/Icon';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function FeatureCard({ feature, index = 0, variant = 'default' }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   const soft = variant === 'soft';
   return (
     <motion.article

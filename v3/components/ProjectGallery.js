@@ -3,13 +3,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight, X } from 'lucide-react';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function ProjectGallery({ projects, filters, linkCards = true }) {
   const [activeFilter, setActiveFilter] = useState('All');
   const [activeItem, setActiveItem] = useState(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   const filtered = useMemo(() => activeFilter === 'All' ? projects : projects.filter((project) => project.type === activeFilter || project.style === activeFilter), [activeFilter, projects]);
   const activeIndex = activeItem ? filtered.findIndex((item) => item.slug === activeItem.slug) : -1;
 

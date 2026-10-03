@@ -1,9 +1,10 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export function Reveal({ children, className = '', delay = 0, distance = 22, duration = 0.8, once = true }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   return (
     <motion.div
       className={className}
@@ -18,7 +19,7 @@ export function Reveal({ children, className = '', delay = 0, distance = 22, dur
 }
 
 export function Stagger({ children, className = '', delay = 0.08, once = true }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   return (
     <motion.div
       className={className}

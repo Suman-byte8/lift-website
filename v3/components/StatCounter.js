@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useInView, useReducedMotion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function StatCounter({ value, suffix = '', label, className = '' }) {
   const ref = useRef(null);
   const visible = useInView(ref, { once: true, amount: 0.45 });
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   const [count, setCount] = useState(reduceMotion ? value : 0);
 
   useEffect(() => {

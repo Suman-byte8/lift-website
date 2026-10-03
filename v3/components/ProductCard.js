@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, MoveRight } from 'lucide-react';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function ProductCard({ product, index = 0, compact = false }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   return (
     <motion.article
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}

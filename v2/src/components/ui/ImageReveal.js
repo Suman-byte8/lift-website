@@ -1,14 +1,15 @@
 "use client";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import SmartImage from "./SmartImage";
 import { revealMask, viewport } from "@/lib/motion";
 import { cn } from "@/lib/cn";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 /** Image that unmasks on scroll-in, with an optional gentle parallax. */
 export default function ImageReveal({ image, alt, className, sizes, parallax = true, priority, children }) {
   const ref = useRef(null);
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
 

@@ -1,12 +1,13 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ShieldCheck, VolumeX, Ruler } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Eyebrow from "@/components/ui/Eyebrow";
 import SmartImage from "@/components/ui/SmartImage";
 import LiftIllustration from "@/components/lift/LiftIllustration";
 import { ease } from "@/lib/motion";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 const specCards = [
   { icon: VolumeX, label: "Whisper-quiet", value: "Soft-start drive", pos: "left-[-4%] top-[18%] sm:left-[-10%]", delay: 1.1 },
@@ -18,11 +19,7 @@ const particles = [12, 28, 44, 63, 78, 90];
 
 export default function HeroSection() {
   const ref = useRef(null);
-  const prefersReduce = useReducedMotion();
-  // Only honour reduced motion after mount so the first client render matches the server HTML.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const reduce = mounted && prefersReduce;
+  const reduce = useSafeReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   const liftY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);

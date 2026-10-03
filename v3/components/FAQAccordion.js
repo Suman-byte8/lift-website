@@ -1,13 +1,14 @@
 'use client';
 
 import { useId, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function FAQAccordion({ items, defaultOpen = -1, className = '' }) {
   const [openIndex, setOpenIndex] = useState(defaultOpen);
   const id = useId();
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   return (
     <div className={`divide-y divide-[#dedad1] border-y border-[#dedad1] ${className}`}>
       {items.map((item, index) => {

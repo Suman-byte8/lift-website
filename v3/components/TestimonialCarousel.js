@@ -2,12 +2,13 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Quote } from 'lucide-react';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function TestimonialCarousel({ testimonials }) {
   const [active, setActive] = useState(0);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   const current = testimonials[active];
   const move = (direction) => setActive((active + direction + testimonials.length) % testimonials.length);
   return (

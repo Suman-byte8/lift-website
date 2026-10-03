@@ -1,6 +1,7 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/cn";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 /**
  * Code-drawn glass home lift (no image dependency). Used in hero, technology and safety sections.
@@ -8,9 +9,9 @@ import { cn } from "@/lib/cn";
  * highest landing when it scrolls into view.
  */
 export default function LiftIllustration({ floors = 3, className, travel = true, tone = "light" }) {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const slabs = Array.from({ length: floors - 1 }, (_, i) => ((i + 1) / floors) * 100);
-  const cabinH = 100 / floors - 4;
+  const cabinH = Math.round((100 / floors - 4) * 1e4) / 1e4;
   const start = 100 - cabinH - 2; // bottom landing (top %)
   const end = 2; // top landing
 

@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import useSafeReducedMotion from '@/lib/useSafeReducedMotion';
 
 export default function ImageReveal({ src, alt, className = '', imageClassName = '', sizes = '(max-width: 768px) 100vw, 50vw', priority = false, fill = true, width, height, ...props }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSafeReducedMotion();
   return (
     <motion.div
       className={`relative overflow-hidden ${className}`}

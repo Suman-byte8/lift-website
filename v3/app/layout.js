@@ -58,7 +58,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth motion-reduce:scroll-auto">
-      <body className={`${editorialFont.variable} ${bodyFont.variable} min-h-screen bg-ivory font-sans text-ink antialiased selection:bg-[#d9c7a8] selection:text-ink`}>
+      <body suppressHydrationWarning className={`${editorialFont.variable} ${bodyFont.variable} min-h-screen bg-ivory font-sans text-ink antialiased selection:bg-[#d9c7a8] selection:text-ink`}>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-5 focus:py-3 focus:text-sm focus:shadow-soft">
           Skip to content
         </a>
