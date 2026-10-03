@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+.cache/
+.npm/
+.config/
+.env*
+.DS_Store
+*.log

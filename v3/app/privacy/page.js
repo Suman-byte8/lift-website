@@ -1,0 +1,15 @@
+import PageHero from '@/components/PageHero';
+import { images } from '@/data/images';
+import { createPageMetadata } from '@/lib/seo';
+import SectionHeading from '@/components/SectionHeading';
+
+export const metadata = createPageMetadata({ title: 'Privacy notice', description: 'Read how AUREL handles contact details submitted through this concept website.', path: '/privacy', image: images.hero.src, imageAlt: images.hero.alt, robots: { index: true, follow: true } });
+
+export default function PrivacyPage() {
+  return (
+    <>
+      <PageHero eyebrow="The considered handling of your details" title={<>Privacy,<br />in plain language.</>} description="An easy-to-read draft privacy notice for the AUREL website concept. Replace with a reviewed, legally approved notice before launch." breadcrumbs={[{ label: 'Privacy' }]} size="short" />
+      <section className="bg-[#f7f5ef] py-16 md:py-24"><div className="mx-auto grid max-w-[1440px] gap-10 px-5 sm:px-8 md:px-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-16"><div><SectionHeading eyebrow="AUREL / website privacy" title={<>Your information<br />is personal.</>} description="This page describes the intended approach for the website concept." /><p className="mt-5 text-[10px] leading-5 text-[#8a7657]">Draft placeholder · legal review required</p></div><div className="space-y-8 text-[13px] leading-7 text-muted"><article><h2 className="font-serif text-[25px] text-ink">Information you share</h2><p className="mt-3">If you use the contact or brochure request form, the fields you submit may include your name, email address, phone number, city, property details and message.</p></article><article><h2 className="font-serif text-[25px] text-ink">How it is used</h2><p className="mt-3">In a live service, these details would be used to respond to your request, provide information you have asked for and manage any follow-up. The current demonstration form validates your submission and returns a confirmation, but does not store or forward the form details. The server log records only the request type and timestamp. It is not connected to a CRM or email service.</p></article><article><h2 className="font-serif text-[25px] text-ink">Storage, sharing and retention</h2><p className="mt-3">The final operator must explain which systems receive your information, how long it is retained, what security measures apply and how to exercise your privacy rights. Those details are not configured in this demo.</p></article><article><h2 className="font-serif text-[25px] text-ink">Cookies and analytics</h2><p className="mt-3">No analytics or advertising tags are included in this concept build. If analytics, embedded maps, chat tools or other third-party services are added, the privacy notice and consent controls must be updated accordingly.</p></article><article><h2 className="font-serif text-[25px] text-ink">Questions</h2><p className="mt-3">For a real publication, insert the verified privacy contact details and responsible legal entity here.</p></article></div></div></section>
+    </>
+  );
+}
